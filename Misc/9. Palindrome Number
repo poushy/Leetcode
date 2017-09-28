@@ -1,0 +1,15 @@
+/**
+ * @param {number} x
+ * @return {boolean}
+ */
+function revPal(n, s) {
+    while (n != 0) {
+        s = s*10 + n%10;
+        n = Math.floor(n/10);
+    }
+    return s;
+}
+var isPalindrome = function(x) {
+    x = x < 0 ? x*-10 :  x; 
+    return x === revPal(x, 0) ? true : false;
+};
