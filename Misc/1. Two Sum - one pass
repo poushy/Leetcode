@@ -4,20 +4,18 @@
  * @return {number[]}
  */
 var twoSum = function(nums, target) {
-    var hash = {};
-    var arr = [];
+    let hash = {};
+    let arr = [];
+    let rem;
     
-    for(var i=0; i< nums.length; i++) {
-        var rem = target - nums[i];
-        if (typeof hash[nums[i]] !== 'undefined') {
-            arr.push(i,hash[nums[i]]);
-            hash[rem] = false;
+    nums.map((num, i) => {
+        if (typeof hash[num] !== 'undefined') {
+            arr.push(i,hash[num])
         } else {
+            rem = target - num;
             hash[rem] = i;
         }
-    }
+    })
     
-    
-    
-    return _.uniq(arr);
+    return arr;
 };
