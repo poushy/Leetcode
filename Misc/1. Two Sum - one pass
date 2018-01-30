@@ -1,0 +1,23 @@
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function(nums, target) {
+    var hash = {};
+    var arr = [];
+    
+    for(var i=0; i< nums.length; i++) {
+        var rem = target - nums[i];
+        if (typeof hash[nums[i]] !== 'undefined') {
+            arr.push(i,hash[nums[i]]);
+            hash[rem] = false;
+        } else {
+            hash[rem] = i;
+        }
+    }
+    
+    
+    
+    return _.uniq(arr);
+};
