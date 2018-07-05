@@ -1,0 +1,27 @@
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} t
+ * @return {string}
+ */
+
+
+var tree2str = function(t) {
+    if(t === null) {
+        return '';
+    } else {
+        var treeString = t.val +"";
+        if (t.right  || t.left){
+            treeString += '(' + tree2str(t.left) + ')';
+        }
+        if(t.right) {
+            treeString += '(' + tree2str(t.right) + ')';
+        }
+        return treeString;
+    }
+};
