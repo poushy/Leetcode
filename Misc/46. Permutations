@@ -1,0 +1,24 @@
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var permute = function(nums) {
+    var perms = [], hash = {};
+    function perm (curr) {
+        if(curr.length === nums.length) {
+            perms.push(curr.slice(0));
+            return;
+        }
+        for(var i=0; i<nums.length; i++) {
+            if(hash[nums[i]] != -1) {
+                curr.push(nums[i]);
+                hash[nums[i]] = -1;
+                perm(curr);
+                curr.pop();
+                hash[nums[i]] = 0;
+            }
+        }
+    }
+    perm([]);
+    return perms;
+};
