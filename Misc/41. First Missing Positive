@@ -1,0 +1,13 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var firstMissingPositive = function(nums) {
+    let hash = {};
+    nums.map(num=> hash[num] = true);
+    for(var i=1; ;i++) {
+        if(!hash[i]) {
+            return i;
+        }
+    }
+};
