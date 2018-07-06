@@ -1,0 +1,14 @@
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var findDisappearedNumbers = function(nums) {
+    const hash = {}, missing = [];
+    nums.map(num => hash[num] = true);
+    for(var i=0; i< nums.length;i++) {
+        if(!hash[i+1]) {
+            missing.push(i+1);
+        }
+    }
+    return missing;
+};
