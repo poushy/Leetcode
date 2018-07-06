@@ -1,0 +1,29 @@
+/**
+ * @param {number} k
+ * @param {number} n
+ * @return {number[][]}
+ */
+
+
+var combinationSum3 = function(k, n) {
+    var comb = [], numHash = {}, curr = [];
+    var findComb = function (tot, sum, ind) {
+        if (sum == 0 && tot == 0) {
+            comb.push(curr.slice(0));
+            return;
+        }
+        for(var j=ind; j< 9; j++) {
+            if (numHash[j] != -1 && sum - (j + 1) >= 0) {
+                curr.push(j + 1);
+                numHash[j] = -1;
+                findComb(tot - 1, sum - (j + 1), j+1);
+                curr.pop();
+                numHash[j] = 0;
+            }
+        }
+    
+    }
+    
+    findComb(k,n,0);
+    return comb;
+};
