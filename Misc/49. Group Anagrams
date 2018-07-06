@@ -1,0 +1,16 @@
+/**
+ * @param {string[]} strs
+ * @return {string[][]}
+ */
+var groupAnagrams = function(strs) {
+    var hash = {};
+    strs.map(str => {
+        var strSorted = str.split('').sort().join('');
+        if(hash[strSorted]) {
+            hash[strSorted].push(str);
+        } else {
+            hash[strSorted] = [str];
+        }
+    });
+    return Object.keys(hash).map(key => hash[key]);
+};
