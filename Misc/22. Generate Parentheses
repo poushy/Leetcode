@@ -1,0 +1,32 @@
+/**
+ * @param {number} n
+ * @return {string[]}
+ */
+
+var generateParenthesis = function(n) {
+    var parenth = {}, mat = [];
+    var generate = (str, lenA, lenB, len, ind) => {
+        if(lenA === 0 && lenB === 0) {
+            parenth[str] = true;
+            return;
+        }
+        if(mat[str]) {
+            return;
+        }
+        for(var i= ind; i< len; i++) {
+            mat[str] = ind;
+            if(lenB >= lenA && lenA > 0) {
+                generate(str + '(', lenA -1, lenB, len, ind + 1);
+            }
+            if(lenA < lenB && lenB > 0) {
+                generate(str + ')', lenA, lenB - 1, len, ind + 1);
+            }
+            
+            
+        }
+    }
+    
+    generate('', n, n, n*2, 0);
+    
+    return Object.keys(parenth);
+};
