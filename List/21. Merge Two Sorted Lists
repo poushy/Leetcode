@@ -1,0 +1,36 @@
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var mergeTwoLists = function(l1, l2) {
+    let head, curr;
+    while(l1 || l2) {
+        let node;
+        if(l1 && (!l2 || (l1.val <= l2.val))) {
+            node = l1;
+            l1 = l1.next;
+        } else if (l2 && (!l1 || (l1.val >= l2.val))) {
+            node = l2;
+            l2 = l2.next;
+        }
+        
+        if(curr) {
+            curr.next = node;
+        }
+        curr = node;
+        
+        if(!head) {
+            head = curr;
+        }
+    }
+    
+    return head || [];
+};
