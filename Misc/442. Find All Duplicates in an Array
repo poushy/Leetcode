@@ -1,0 +1,20 @@
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var findDuplicates = function(nums) {
+    var hash= {}, dup = [];
+    nums.map(num => {
+        if(hash[num]) {
+            hash[num]++;
+        } else {
+            hash[num] = 1;
+        }
+    })
+    for(var i=0; i<= nums.length; i++) {
+        if(hash[i] > 1) {
+            dup.push(i);
+        }
+    }
+    return dup;
+};
