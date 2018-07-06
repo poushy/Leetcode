@@ -4,10 +4,10 @@
  */
 
 var generateParenthesis = function(n) {
-    var parenth = {}, mat = [];
+    var parenth = [], mat = [];
     var generate = (str, lenA, lenB, len, ind) => {
         if(lenA === 0 && lenB === 0) {
-            parenth[str] = true;
+            parenth.push(str);
             return;
         }
         if(mat[str]) {
@@ -28,5 +28,5 @@ var generateParenthesis = function(n) {
     
     generate('', n, n, n*2, 0);
     
-    return Object.keys(parenth);
+    return parenth;
 };
