@@ -1,0 +1,17 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var removeDuplicates = function(nums) {
+    let last = 0, i = 1;
+    while(i< nums.length) {
+        while(i< nums.length && nums[i] === nums[last]) {
+            i++;
+        }
+        if(i < nums.length) {
+            nums[++last] = nums[i++];
+        }
+    }
+    return last + 1;
+    
+};
