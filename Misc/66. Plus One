@@ -1,0 +1,24 @@
+/**
+ * @param {number[]} digits
+ * @return {number[]}
+ */
+var plusOne = function(digits) {
+    let sum = [], carry = 1, i=digits.length - 1;
+    if(digits.length == 0) {
+        return [1];
+    }
+    while(i>=0) {
+        if(digits[i] + carry == 10) {
+            carry = 1;
+            sum.push(0);
+            i--;
+        } else {
+            sum.push(digits[i--] + carry);
+            carry = 0;
+        }
+    }
+    if(carry === 1) {
+        sum.push(1);
+    }
+    return sum.reverse();
+};
