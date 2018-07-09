@@ -1,0 +1,37 @@
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var countSubstrings = function(s) {
+    
+    var subStrings = 0, mat = [];
+    
+    function findPals(str, start, end) {
+        if(mat[start] && mat[start][end]) {
+            return;
+        }
+        
+        if(start < 0 || end >= str.length) {
+            return;
+        }
+        if(str[start] === str[end]) {
+            subStrings++;
+        
+            if(mat[start]) {
+                mat[start] = [];   
+                mat[start][end] = 1;
+            }
+            
+            if(end === start) {
+                findPals(str, start, end + 1);
+            }
+            
+            findPals(str, start - 1, end +1);
+        }
+    }
+    for(var i=0; i< s.length; i++) {
+        findPals(s, i, i);   
+    }
+    return subStrings;
+    
+};
