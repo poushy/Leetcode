@@ -1,0 +1,29 @@
+/**
+ * @param {string} S
+ * @return {string[]}
+ */
+var letterCasePermutation = function(S) {
+    var combos = {};
+    if(S === '') {
+        return [""];
+    }
+    
+    function findCombos(curr, index) {
+        combos[curr.join('')] = true;
+        if(index >= S.length) {
+            return;
+        }
+        if(S[index].match(/[a-zA-Z]/)) {
+            curr[index] = curr[index].toUpperCase();
+            findCombos(curr, index + 1);
+            curr[index] = curr[index].toLowerCase();
+            findCombos(curr, index + 1);
+        } else {
+            findCombos(curr, index + 1);
+        }
+    }
+    
+    findCombos(S.split(''), 0);
+    return Object.keys(combos);
+    
+};
