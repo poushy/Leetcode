@@ -1,0 +1,24 @@
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var subsets = function(nums) {
+    var combos = [], mat= [], done = {};
+    nums.map((num, index) =>mat[index] = 0)
+    function find(curr) {
+        var combo = nums.filter((n, index) => curr[index]);
+        if(done[combo]) {
+            return;
+        }
+        combos.push(combo);
+        done[combo] = true;
+        
+        for(var i=0; i< nums.length; i++) {
+            curr[i] = 1;
+            find(curr);
+            curr[i] = 0;
+        }
+    }
+    find(mat);
+    return combos;
+};
