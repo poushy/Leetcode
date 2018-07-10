@@ -1,0 +1,38 @@
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var search = function(nums, target) {
+    var found = -1;
+    function find(start, end) {
+        if (found !== -1) {
+            return;
+        }
+        if (start > end) {
+            return;
+        }
+        var mid = start + Math.floor((end - start)/2);
+        if (nums[mid] === target) {
+            found = mid;
+            return;
+        }
+        if (nums[mid] < nums[start]) {
+            if(target >= nums[start] || target < nums[mid]) {
+                find(start, mid - 1);
+            } else {
+                find(mid + 1, end);
+            }
+        }
+        else {
+            if(target >= nums[start] && target < nums[mid]) {
+                find(start, mid - 1);
+            } else {
+                find(mid + 1, end);
+            }
+        }
+        
+    }
+    find(0,nums.length - 1);
+    return found;
+};
