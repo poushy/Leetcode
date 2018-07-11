@@ -1,0 +1,39 @@
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var longestValidParentheses = function(s) {
+    var stack = [], track = [];
+    for(var ind=0; ind< s.length; ind++) {
+        if(s[ind] === '(') {
+            stack.push(ind);
+            track[ind] = 0;
+        } else {
+            if(stack.length > 0) {
+                var curr = stack.pop();
+                track[curr] = 1;
+                track[ind] = 1;
+            } else {
+                track[ind] = 0;
+            }
+        }
+    }
+    var maxLen = 0, curr = 0;
+    for(var i=0; i< track.length; i++) {
+        if(track[i] === 1) {
+            curr++;
+        }
+        else {
+            if(curr > maxLen) {
+                maxLen = curr;
+            }
+            curr = 0;
+        }
+    }
+    
+    if(curr > maxLen) {
+        maxLen = curr;
+    }
+
+    return maxLen;
+};
