@@ -1,0 +1,30 @@
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var findTilt = function(root) {
+    
+    var tilt = 0;
+    
+    const sumTree = (node) => {
+        if (node === null) {
+           return 0; 
+        }
+        var left =  sumTree(node.left);
+        var right = sumTree(node.right);
+        var curr = left - right;
+        tilt += (curr < 0 ? -curr : curr);
+        return left + right + node.val;
+    }
+    
+    sumTree(root);
+    return tilt;
+    
+};
