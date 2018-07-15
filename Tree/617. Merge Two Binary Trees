@@ -14,7 +14,6 @@ var mergeTrees = function(t1, t2) {
     var newRoot = null;
     
     function merge(node1, node2, curr) {
-        //console.log('Node1',node1, 'Node2',node2,'Curr', curr);
         if(node1 !== null && node2 == null) {
              curr.val = node1.val;
         }
