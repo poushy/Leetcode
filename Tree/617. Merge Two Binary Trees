@@ -1,0 +1,43 @@
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} t1
+ * @param {TreeNode} t2
+ * @return {TreeNode}
+ */
+var mergeTrees = function(t1, t2) {
+    var newRoot = null;
+    
+    function merge(node1, node2, curr) {
+        //console.log('Node1',node1, 'Node2',node2,'Curr', curr);
+        if(node1 !== null && node2 == null) {
+             curr.val = node1.val;
+        }
+        else if(node1 == null && node2 !== null) {
+            curr.val  = node2.val;
+        }
+        else if(node1 !== null & node2 !== null) {
+            curr.val = node1.val + node2.val;
+        }
+        
+        if((node1 && node1.left !== null) || (node2 && node2.left !== null)) {
+            curr.left = new TreeNode(0);
+            merge(node1? node1.left : null, node2 ? node2.left: null, curr.left);
+        }
+        if((node1 && node1.right !== null) || (node2 && node2.right !== null)) {
+            curr.right = new TreeNode(0);
+            merge(node1? node1.right : null, node2 ? node2.right: null, curr.right);
+        }
+    }
+    
+    if(t1 || t2) {
+        newRoot = new TreeNode(0);
+        merge(t1, t2, newRoot);
+    }
+    return newRoot
+};
