@@ -1,0 +1,30 @@
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+var isValidBST = function(root) {
+    let prev, valid = true;
+    const isValid = (node) => {
+        if (!valid || !node) {
+            return;
+        }
+        
+        isValid(node.left);
+        if (typeof prev != 'undefined' && prev >= node.val) {
+            valid = false;
+            return;
+        }
+        prev = node.val;
+        isValid(node.right)
+        
+    }
+    isValid(root)
+    return valid;
+};
