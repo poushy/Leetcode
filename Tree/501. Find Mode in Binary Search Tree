@@ -1,0 +1,32 @@
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var findMode = function(root) {
+    let mode = {}, top = 1;
+    const find = (node) => {
+        if (!node) {
+           return; 
+        }
+        find(node.left);
+        if (mode[node.val]) {
+            mode[node.val]++;
+            if (mode[node.val] > top) {
+                top = mode[node.val];
+            }
+        } else {
+            mode[node.val] = 1;
+        }
+        find(node.right);
+    }
+    
+    find(root);
+    return Object.keys(mode).filter(k => mode[k] == top);
+};
