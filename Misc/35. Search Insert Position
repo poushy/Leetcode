@@ -1,0 +1,24 @@
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var searchInsert = function(nums, target) {
+    const divSearch = (start, end) => {
+        const mid = start + Math.floor((end - start)/2);
+        
+        if (start > end) {
+           return mid + 1; 
+        }
+        
+        const midNum = nums[mid];
+        if (midNum == target) {
+            return mid; 
+        } else if(midNum < target) {
+            return divSearch(mid + 1, end);
+        } else {
+            return divSearch(start, mid -1);
+        }
+    }
+    return divSearch(0, nums.length);
+};
