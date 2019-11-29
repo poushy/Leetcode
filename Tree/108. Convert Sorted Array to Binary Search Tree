@@ -1,0 +1,33 @@
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {number[]} nums
+ * @return {TreeNode}
+ */
+var sortedArrayToBST = function(nums) {
+    let root = null;
+    const createTree = (start, end, node, side) => {
+        if (start>end) {
+            return;
+        }
+        const index = start + Math.ceil((end - start)/2);
+        const val = nums[index];
+        const newNode = new TreeNode(val);
+        if (!node) {
+            root = newNode;
+        } else {
+            node[side] = newNode;
+        }
+        
+        createTree(start, index - 1, newNode, 'left');
+        createTree(index + 1, end, newNode, 'right');
+    }
+    
+    createTree(0, nums.length - 1);
+    return root;
+};
