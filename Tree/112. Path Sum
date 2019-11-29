@@ -1,0 +1,31 @@
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {number} sum
+ * @return {boolean}
+ */
+var hasPathSum = function(root, sum) {
+    if(root == null) {
+        return false;
+    }
+    let hasPath = false;
+    const findPath = (node, tot) => {
+        if (!node || hasPath) {
+            return;
+        }
+        if (tot + node.val  == sum && !node.left && !node.right) {
+            hasPath = true;
+        } else {
+            findPath(node.left, tot + node.val);
+            findPath(node.right, tot + node.val);
+        }
+    }
+    findPath(root, 0);
+    return hasPath;
+};
