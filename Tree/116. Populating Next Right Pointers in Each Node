@@ -1,0 +1,33 @@
+/**
+ * // Definition for a Node.
+ * function Node(val, left, right, next) {
+ *    this.val = val === undefined ? null : val;
+ *    this.left = left === undefined ? null : left;
+ *    this.right = right === undefined ? null : right;
+ *    this.next = next === undefined ? null : next;
+ * };
+ */
+/**
+ * @param {Node} root
+ * @return {Node}
+ */
+var connect = function(root) {
+    let levels = [];
+    const trav = (node, level) => {
+        if (!node) {
+           return; 
+        }
+        trav(node.left, level + 1);
+        trav(node.right, level + 1);
+        if (levels[level]) {
+            const top = levels[level].pop();
+            top.next = node;
+            levels[level].push(top);
+            levels[level].push(node);
+        } else {
+            levels[level] = [node];
+        }
+    }
+    trav(root, 0);
+    return root;
+};
