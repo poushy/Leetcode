@@ -1,0 +1,44 @@
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} x
+ * @return {ListNode}
+ */
+var partition = function(head, x) {
+    let curr = head;
+    let smallStart,smallEnd, bigStart, bigEnd;
+    
+    if (!head) {
+        return head;
+    }
+    while(curr) {
+        if (curr.val < x) {
+           smallEnd ? 
+               smallEnd.next = curr :
+               smallStart = curr;
+            smallEnd = curr;
+        } else {
+            bigEnd ?
+                bigEnd.next = curr :
+                bigStart = curr;
+            bigEnd = curr;
+        }
+        curr = curr.next;
+    }
+    
+    if (smallEnd) {
+        head = smallStart;
+        smallEnd.next = bigStart;
+    } else {
+        head = bigStart;
+    }
+    bigEnd ? bigEnd.next = null : smallEnd.next = null;
+   
+    return head;
+};
