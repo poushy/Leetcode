@@ -22,7 +22,6 @@ var connect = function(root) {
         if (levels[level]) {
             const top = levels[level].pop();
             top.next = node;
-            levels[level].push(top);
             levels[level].push(node);
         } else {
             levels[level] = [node];
