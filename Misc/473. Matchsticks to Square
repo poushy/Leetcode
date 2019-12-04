@@ -1,0 +1,40 @@
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var makesquare = function(nums) {
+    if (nums.length == 0) {
+        return false;
+    }
+    const sum = nums.reduce((s,v) => s+v,0);
+    if ( sum % 4 == 0) {
+        const side = sum / 4;
+        if (nums.every(n => n <= side)) {
+            let sumMap = [0,0,0,0], found = false;
+            const findComb = (sumMap, index) => {
+                if (found) {
+                   return; 
+                }
+                if (index == nums.length) {
+                    if (sumMap.every(s => s == side)) {
+                        found = true;
+                    }
+                    return;
+                }
+                const number = nums[index];
+                for (let ind=0; ind< 4; ind++) {
+                    if (number <= side - sumMap[ind]) {
+                        sumMap[ind] += number;
+                        findComb(sumMap, index + 1);
+                        sumMap[ind] -= number;
+                    }
+                }
+            }
+            
+            findComb([0,0,0,0], 0)
+            return found;
+            
+        }
+    }
+    return false;
+};
