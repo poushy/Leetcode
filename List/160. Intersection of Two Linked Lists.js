@@ -12,39 +12,22 @@
  * @return {ListNode}
  */
 var getIntersectionNode = function(headA, headB) {
-    var tempHeadA = headA, tempHeadB = headB,count = 0;
-    while(tempHeadA && tempHeadA.next !== null) {
-        tempHeadA = tempHeadA.next;
-        count++;
+    let curr = null, currA = headA, currB = headB, stack1 = [], stack2 = [];
+    while(currA) {
+        stack1.push(currA);
+        currA = currA.next;
     }
-    while(tempHeadB && tempHeadB.next !== null) {
-        tempHeadB = tempHeadB.next;
-        count--;
+    while(currB) {
+        stack2.push(currB);
+        currB = currB.next;
     }
-    tempHeadB = headB, tempHeadA = headA;
-    if(count != 0){
-        if(count < 0) {
-            
-            while(count < 0) {
-                tempHeadB = tempHeadB.next;
-                count++;
-            }
+    while(stack1.length > 0) {
+        const curr1 = stack1.pop();
+        const curr2 = stack2.pop();
+        if (curr1 != curr2) {
+            break;
         }
-        else {
-            while(count > 0) {
-                tempHeadA = tempHeadA.next;
-                count--;
-            }
-        }
+        curr = curr1;
     }
-    while(tempHeadA!== null && tempHeadB !== null) {
-        if(tempHeadA == tempHeadB) {
-            return tempHeadA
-        }
-        else {
-            tempHeadA = tempHeadA.next;
-            tempHeadB = tempHeadB.next;
-        }
-    }
-    return null;
+    return curr;
 };
