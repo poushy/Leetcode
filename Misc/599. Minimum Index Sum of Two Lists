@@ -1,0 +1,23 @@
+/**
+ * @param {string[]} list1
+ * @param {string[]} list2
+ * @return {string[]}
+ */
+var findRestaurant = function(list1, list2) {
+    let map1 = {}, map2 = {};
+    let minValue = 100000;
+    list1.forEach((l,index) => map1[l] = index);
+    list2.forEach((l,index) => {
+        if(typeof map1[l] != 'undefined') {
+            map2[l] = map1[l] + index;
+        }
+    });
+    
+    
+    Object.keys(map2).forEach(k => {
+        if (map2[k] < minValue) {
+           minValue = map2[k];
+        }
+    });
+    return Object.keys(map2).filter(k => map2[k] == minValue);
+}; 
