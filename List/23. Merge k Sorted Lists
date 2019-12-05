@@ -1,0 +1,38 @@
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode[]} lists
+ * @return {ListNode}
+ */
+var mergeKLists = function(lists) {
+    let head = null, end;
+    
+    while (true) {
+            let min, listNode;
+            lists.forEach((p, index) => {
+                if (p && ( !listNode || listNode.val > p.val)) {
+                    min = index; 
+                    listNode = p;
+                }
+            });
+            if (listNode) {
+                lists[min] = listNode.next;
+
+                if (!head) {
+                    head = listNode;
+                } else {
+                    end.next = listNode;
+                }
+                end = listNode;
+            } else {
+                break;
+            }
+    }
+    end && (end.next = null);
+    return head;
+};
