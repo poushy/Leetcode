@@ -1,0 +1,53 @@
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {TreeNode}
+ */
+var sortedListToBST = function(head) {
+    const findMid = (start, end) => {
+        let double = start;
+        while (double && double != end && double.next != end) {
+            start = start.next;  
+            double = double.next;
+            if(!double || double.next == end) {
+                break;
+            }
+            double = double.next;
+        }
+        return start;
+    }
+    
+    let root = null;
+    const makeTree = (node,side,start, end) => {
+        const mid = findMid(start, end);
+        if (mid && (!end || (start.val < end.val))) {
+            const newNode = new TreeNode(mid.val);
+            if (!node) {
+                root = newNode;
+            } else {
+                node[side] = newNode;
+            }
+            if (start != mid) {
+                makeTree(newNode, 'left', start, mid);
+            }
+            if(end != mid) {
+                makeTree(newNode, 'right', mid.next, end);
+            }
+        }
+    }
+    makeTree(null,'',head, null);
+    return root;
+};
